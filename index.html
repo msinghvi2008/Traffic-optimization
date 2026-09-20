@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Egreen Quanta — Quantum-inspired adaptive traffic routing demo." />
   <title>Egreen Quanta | Adaptive Traffic Router</title>
-  <link rel ="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
@@ -35,10 +35,10 @@
             <g class="minor-roads"><path d="M34 100L210 190L347 70L510 155L675 72L872 170"/><path d="M55 318L210 190L350 300L510 155L657 276L872 170"/><path d="M130 450L350 300L466 412L657 276L814 438"/><path d="M210 190L242 390"/><path d="M347 70L350 300"/><path d="M510 155L466 412"/><path d="M675 72L657 276"/><path d="M55 318L242 390L466 412L814 438"/></g>
             <g class="roads"><path id="road-main" d="M55 318L210 190L350 300L510 155L675 72L872 170"/><path d="M130 450L350 300L466 412L657 276L872 170"/><path d="M34 100L210 190L347 70L510 155"/><path d="M210 190L242 390L466 412"/></g>
             <g class="traffic"><path d="M510 155L675 72"/><path d="M130 450L350 300"/><path id="incident-road" d="M657 276L872 170"/></g>
-            <g id="route-normal" class="route"><path d="M55 318L210 190L350 300L510 155L675 72L872 170"/></g>
-            <g id="route-reroute" class="route hidden"><path d="M55 318L210 190L242 390L466 412L657 276L814 438L872 170"/></g>
+            <g id="route-normal" class="route"><path id="normal-route-path" d="M55 318L210 190L350 300L510 155L675 72L872 170"/></g>
+            <g id="route-reroute" class="route hidden"><path id="reroute-path" d="M55 318L210 190L350 300L510 155L675 72L872 170"/></g>
             <g class="nodes"><circle cx="210" cy="190" r="6"/><circle cx="350" cy="300" r="6"/><circle cx="510" cy="155" r="6"/><circle cx="675" cy="72" r="6"/><circle cx="466" cy="412" r="6"/><circle cx="657" cy="276" r="6"/></g>
-            <g class="marker start"><circle cx="55" cy="318" r="15"/><text x="55" y="323">S</text><label x="77" y="301">JAIPUR · START</label></g><g class="marker end"><circle cx="872" cy="170" r="15"/><text x="872" y="175">D</text><label x="744" y="148">TARGET · DESTINATION</label></g>
+            <g id="start-marker" class="marker start"><circle cx="55" cy="318" r="15"/><text x="55" y="323">S</text><label id="start-label" x="77" y="301">SINDHI CAMP</label></g><g id="end-marker" class="marker end"><circle cx="242" cy="390" r="15"/><text x="242" y="395">D</text><label id="end-label" x="114" y="366">MI ROAD</label></g>
             <g id="incident-marker" class="incident-marker hidden"><circle cx="765" cy="220" r="14"/><path d="M765 211v10M765 226v2"/><text x="782" y="225">INCIDENT</text></g>
           </svg>
           <div class="map-legend"><span><i class="leg-route"></i>Optimized route</span><span><i class="leg-heavy"></i>Heavy traffic</span><span><i class="leg-incident"></i>Incident / blocked</span><span><i class="leg-normal"></i>Normal road</span></div>
@@ -46,8 +46,30 @@
       </div>
       <aside class="controls panel">
         <div class="panel-label">Optimization parameters <span>DEMO</span></div>
-        <label>Origin<div class="select-like"><b>⌖</b><span>Jaipur — Start<small>Junction A</small></span><i>⌄</i></div></label>
-        <label>Destination<div class="select-like"><b>⌁</b><span>Target — Destination<small>Junction B</small></span><i>⌄</i></div></label>
+          <label>Origin
+            <select id="origin-location" aria-label="Origin">
+              <option value="railway">Jaipur Railway Station</option>
+              <option value="airport">Jaipur Airport</option>
+              <option value="hawa-mahal">Hawa Mahal</option>
+              <option value="mi-road">MI Road</option>
+              <option value="sindhi-camp">Sindhi Camp</option>
+              <option value="malviya-nagar">Malviya Nagar</option>
+              <option value="mansarovar">Mansarovar</option>
+              <option value="ajmer-road">Ajmer Road</option>
+            </select>
+          </label>
+          <label>Destination
+            <select id="destination-location" aria-label="Destination">
+              <option value="railway">Jaipur Railway Station</option>
+              <option value="airport">Jaipur Airport</option>
+              <option value="hawa-mahal">Hawa Mahal</option>
+              <option value="mi-road" selected>MI Road</option>
+              <option value="sindhi-camp">Sindhi Camp</option>
+              <option value="malviya-nagar">Malviya Nagar</option>
+              <option value="mansarovar">Mansarovar</option>
+              <option value="ajmer-road">Ajmer Road</option>
+            </select>
+          </label>
         <label class="traffic-label">Traffic intensity <output id="traffic-value">38%</output><input id="traffic-slider" type="range" min="10" max="100" value="38" /></label>
         <label>Optimization objective<select id="objective"><option value="balanced">Balanced: Time + Distance + Congestion</option><option value="fastest">Fastest Route</option><option value="low">Lowest Congestion</option><option value="fleet">Fleet / Multi-Vehicle Routing</option></select></label>
         <label>Routing engine<select id="engine"><option value="qubo">Quantum-Inspired QUBO</option><option value="anneal">QAOA / Annealing Simulation</option><option value="ga">GA / ACO</option><option value="dijkstra">Dijkstra</option><option value="astar">A*</option></select></label>
