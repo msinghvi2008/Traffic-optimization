@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Egreen Quanta — Quantum-inspired adaptive traffic routing demo." />
+  <title>Egreen Quanta | Adaptive Traffic Router</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="nav wrap">
+    <a class="brand" href="#top" aria-label="Egreen Quanta home"><span class="brand-mark">Q</span><span>EGREEN <b>QUANTA</b><small>QUANTUM-INSPIRED ADAPTIVE TRAFFIC ROUTER</small></span></a>
+    <nav><a href="#demo">Live Demo</a><a href="#pipeline">Optimization</a><a href="#benchmark">Benchmark</a><a href="#analytics">Analytics</a></nav>
+    <div class="online"><i></i>System online</div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div><p class="eyebrow">URBAN MOBILITY INTELLIGENCE <span>•</span> DEMO MODE</p><h1>Adaptive routing for<br>a changing city.</h1><p class="hero-copy">Optimize routes across travel time, distance and congestion using a quantum-inspired optimization workflow.</p><div class="hero-actions"><a class="button primary" href="#demo">Open live demo <span>→</span></a><a class="button ghost" href="#pipeline">Explore optimization</a></div></div>
+      <div class="hero-orbit" aria-hidden="true"><div class="orbit-ring ring-a"></div><div class="orbit-ring ring-b"></div><div class="orbit-core">Q<span>•</span></div><em>NETWORK<br>OPTIMIZER</em></div>
+    </section>
+
+    <section id="demo" class="section-head"><div><p class="eyebrow">LIVE ROUTING CONSOLE</p><h2>Route optimization</h2></div><div class="demo-badge">SIMULATED CITY NETWORK</div></section>
+    <section class="dashboard">
+      <div class="map-card panel">
+        <div class="panel-top"><div><span class="live-dot"></span> Jaipur urban network <small id="route-status">Route ready</small></div><div class="map-tools"><button aria-label="Zoom in">+</button><button aria-label="Zoom out">−</button><button aria-label="Locate">⌖</button></div></div>
+        <div class="map-wrap">
+          <svg id="city-map" viewBox="0 0 920 520" role="img" aria-label="Synthetic city road network with optimized traffic route">
+            <defs><pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M 46 0 L 0 0 0 46" fill="none" stroke="#2b3a50" stroke-width=".7" opacity=".4"/></pattern><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <rect width="920" height="520" fill="url(#grid)"/><path class="water" d="M-10 410 C160 360 200 490 390 420 S620 340 930 415 L930 530 L-10 530Z"/>
+            <g class="minor-roads"><path d="M34 100L210 190L347 70L510 155L675 72L872 170"/><path d="M55 318L210 190L350 300L510 155L657 276L872 170"/><path d="M130 450L350 300L466 412L657 276L814 438"/><path d="M210 190L242 390"/><path d="M347 70L350 300"/><path d="M510 155L466 412"/><path d="M675 72L657 276"/><path d="M55 318L242 390L466 412L814 438"/></g>
+            <g class="roads"><path id="road-main" d="M55 318L210 190L350 300L510 155L675 72L872 170"/><path d="M130 450L350 300L466 412L657 276L872 170"/><path d="M34 100L210 190L347 70L510 155"/><path d="M210 190L242 390L466 412"/></g>
+            <g class="traffic"><path d="M510 155L675 72"/><path d="M130 450L350 300"/><path id="incident-road" d="M657 276L872 170"/></g>
+            <g id="route-normal" class="route"><path d="M55 318L210 190L350 300L510 155L675 72L872 170"/></g>
+            <g id="route-reroute" class="route hidden"><path d="M55 318L210 190L242 390L466 412L657 276L814 438L872 170"/></g>
+            <g class="nodes"><circle cx="210" cy="190" r="6"/><circle cx="350" cy="300" r="6"/><circle cx="510" cy="155" r="6"/><circle cx="675" cy="72" r="6"/><circle cx="466" cy="412" r="6"/><circle cx="657" cy="276" r="6"/></g>
+            <g class="marker start"><circle cx="55" cy="318" r="15"/><text x="55" y="323">S</text><label x="77" y="301">JAIPUR · START</label></g><g class="marker end"><circle cx="872" cy="170" r="15"/><text x="872" y="175">D</text><label x="744" y="148">TARGET · DESTINATION</label></g>
+            <g id="incident-marker" class="incident-marker hidden"><circle cx="765" cy="220" r="14"/><path d="M765 211v10M765 226v2"/><text x="782" y="225">INCIDENT</text></g>
+          </svg>
+          <div class="map-legend"><span><i class="leg-route"></i>Optimized route</span><span><i class="leg-heavy"></i>Heavy traffic</span><span><i class="leg-incident"></i>Incident / blocked</span><span><i class="leg-normal"></i>Normal road</span></div>
+        </div>
+      </div>
+      <aside class="controls panel">
+        <div class="panel-label">Optimization parameters <span>DEMO</span></div>
+        <label>Origin<div class="select-like"><b>⌖</b><span>Jaipur — Start<small>Junction A</small></span><i>⌄</i></div></label>
+        <label>Destination<div class="select-like"><b>⌁</b><span>Target — Destination<small>Junction B</small></span><i>⌄</i></div></label>
+        <label class="traffic-label">Traffic intensity <output id="traffic-value">38%</output><input id="traffic-slider" type="range" min="10" max="100" value="38" /></label>
+        <label>Optimization objective<select id="objective"><option value="balanced">Balanced: Time + Distance + Congestion</option><option value="fastest">Fastest Route</option><option value="low">Lowest Congestion</option><option value="fleet">Fleet / Multi-Vehicle Routing</option></select></label>
+        <label>Routing engine<select id="engine"><option value="qubo">Quantum-Inspired QUBO</option><option value="anneal">QAOA / Annealing Simulation</option><option value="ga">GA / ACO</option><option value="dijkstra">Dijkstra</option><option value="astar">A*</option></select></label>
+        <button id="run" class="button primary full">Run optimization <span>→</span></button><button id="incident" class="button warning full">Simulate traffic incident</button><button id="reset" class="reset">↺ Reset scenario</button>
+        <div class="constraint"><span>✓</span> Constraints active <small>Continuity · blocked roads · endpoints</small></div>
+      </aside>
+    </section>
+    <div id="progress" class="progress panel hidden"><div class="spinner"></div><span id="progress-text">Building weighted graph...</span><small>SIMULATED OPTIMIZATION</small></div>
+    <section class="metrics" aria-label="Live demo metrics"><article><span>Travel time</span><strong id="travel-time">24.6 <small>min</small></strong><em id="time-change">− 13.4% vs baseline</em></article><article><span>Distance</span><strong id="distance">11.8 <small>km</small></strong><em id="distance-change">Route length</em></article><article><span>Congestion score</span><strong id="congestion">31</strong><em id="congestion-change">Low network pressure</em></article><article><span>Candidate routes</span><strong id="candidates">2,480</strong><em id="candidate-change">Search space explored</em></article></section>
+
+    <section id="pipeline" class="section-head spaced"><div><p class="eyebrow">OPTIMIZATION PIPELINE</p><h2>From street data to a better route.</h2></div><p class="subtle">Designed to connect to a Python optimization service when live data is available.</p></section>
+    <section class="pipeline"> <article><b>01</b><h3>Traffic + Map Data</h3><p>Ingest traffic signals and network state.</p></article><i>→</i><article><b>02</b><h3>Weighted Road Graph</h3><p>Represent roads, edges and conditions.</p></article><i>→</i><article><b>03</b><h3>QUBO Formulation</h3><p>Model route choices and constraints.</p></article><i>→</i><article><b>04</b><h3>Quantum-Inspired Search</h3><p>Explore candidate solutions.</p></article><i>→</i><article><b>05</b><h3>Route Refinement</h3><p>Validate continuity and feasibility.</p></article><i>→</i><article><b>06</b><h3>Optimized Route</h3><p>Return the best valid path.</p></article></section>
+
+    <section id="benchmark" class="split-section"><div class="section-head"><div><p class="eyebrow">ALGORITHM BENCHMARK</p><h2>Compare routing strategies.</h2></div><div class="demo-badge">DEMONSTRATION VALUES</div></div><div class="table-card panel"><table><thead><tr><th>Algorithm</th><th>Travel time</th><th>Distance</th><th>Congestion</th><th>Runtime</th><th>Purpose</th></tr></thead><tbody><tr><td>Dijkstra</td><td>29.4 min</td><td>10.9 km</td><td>57</td><td>Low</td><td>Shortest-path baseline</td></tr><tr><td>A*</td><td>27.8 min</td><td>11.0 km</td><td>51</td><td>Low</td><td>Heuristic search</td></tr><tr><td>GA / ACO</td><td>25.9 min</td><td>11.6 km</td><td>38</td><td>Medium</td><td>Metaheuristic routing</td></tr><tr class="active-row"><td><span>●</span> Quantum-inspired workflow</td><td>24.6 min</td><td>11.8 km</td><td>31</td><td>Medium</td><td>Multi-objective exploration</td></tr></tbody></table><p class="table-note">Illustrative interface values only — replace with measurements from controlled experiments.</p></div></section>
+
+    <section id="analytics" class="section-head spaced"><div><p class="eyebrow">ANALYTICS</p><h2>Optimization behavior at a glance.</h2></div><div class="demo-badge">SIMULATED DATA</div></section>
+    <section class="analytics-grid"><article class="chart-card panel"><div class="chart-title"><div><h3>Convergence</h3><p>Best objective score by iteration</p></div><span>↓ 63%</span></div><svg class="line-chart" viewBox="0 0 500 210" aria-label="Sample convergence chart"><g class="chart-grid"><path d="M42 12V175H488M42 52H488M42 92H488M42 132H488M42 172H488"/></g><polyline points="42,25 65,43 83,51 105,69 125,81 148,100 175,110 205,119 236,131 270,139 300,146 340,151 380,157 430,160 488,164"/><circle cx="488" cy="164" r="5"/><text x="5" y="25">1.0</text><text x="5" y="176">0.0</text><text x="42" y="200">0</text><text x="460" y="200">100</text></svg></article>
+      <article class="chart-card panel"><div class="chart-title"><div><h3>Algorithm comparison</h3><p>Combined objective score</p></div><span>LOWER IS BETTER</span></div><div class="bars"><div><i style="height:76%"></i><label>Dijkstra</label></div><div><i style="height:65%"></i><label>A*</label></div><div><i style="height:43%"></i><label>GA/ACO</label></div><div class="quantum"><i style="height:31%"></i><label>Q-Inspired</label></div></div></article>
+      <article class="chart-card panel scalability"><div class="chart-title"><div><h3>Scalability</h3><p>Sample network growth behavior</p></div></div><div class="scale-row"><span>50 nodes</span><i><b style="width:20%"></b></i><em>0.4s</em></div><div class="scale-row"><span>200 nodes</span><i><b style="width:38%"></b></i><em>1.1s</em></div><div class="scale-row"><span>500 nodes</span><i><b style="width:62%"></b></i><em>2.8s</em></div><div class="scale-row"><span>1000 nodes</span><i><b style="width:88%"></b></i><em>4.7s</em></div></article></section>
+
+    <section class="fuel panel"><div><p class="eyebrow">FUEL CONSUMPTION STUDY</p><h2>Bring your validated study into the dashboard.</h2><p>Reserved for the team’s supplied comparison graph and its documented methodology.</p><span>EXISTING SYSTEM <b>↔</b> OUR SYSTEM</span></div><div class="fuel-placeholder"><div class="placeholder-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>Fuel Consumption Comparison</strong><small>Replace this component with your verified image or dataset.</small></div></section>
+  </main>
+  <footer class="wrap"><span>© 2026 EGREEN QUANTA</span><span>SIH26137 · Quantum-inspired optimization demo · No quantum hardware claim</span></footer>
+  <script src="script.js"></script>
+</body></html>
